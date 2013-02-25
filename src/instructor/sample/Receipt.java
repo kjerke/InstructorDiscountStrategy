@@ -1,6 +1,7 @@
 package instructor.sample;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Date;
 public class Receipt {
     private ReceiptDataAccessStrategy db; // strategy component (DIP compliant)
     private static int receiptNo = 0; // global counter
+    private Date receiptDate;
     private Customer customer;
     private LineItem[] lineItems;
     // strategy component (DIP compliant)
@@ -21,6 +23,7 @@ public class Receipt {
         this.customer = findCustomer(custId);
         receiptNo++;
         lineItems = new LineItem[0];
+        receiptDate = new Date();
     }
     
     private final Customer findCustomer(final String custId) {
@@ -58,6 +61,15 @@ public class Receipt {
         lineItems = tempItems;
     }
     
+    public String getReceiptDateFormatted() {
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy hh:mm a");
+        return sdf.format(receiptDate);
+    }
+    
+    public final void outputMessage(String msg) {
+        output.outputMessage(msg);
+    }
+    
     public final void outputReceipt() {
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         final String CRLF = "\n";
@@ -66,7 +78,7 @@ public class Receipt {
         // Build header
         StringBuilder receiptData = new StringBuilder("Thank you for shopping at Kohls!\n\n");
         receiptData.append("Sold to: ").append(customer.getName()).append(CRLF);
-        receiptData.append("Date of Sale: ").append(new Date()).append(CRLF);
+        receiptData.append("Date of Sale: ").append(getReceiptDateFormatted()).append(CRLF);
         receiptData.append("Receipt No.: " ).append(Receipt.receiptNo).append(CRLF2);
         
         // Now process line items

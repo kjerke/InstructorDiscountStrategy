@@ -13,5 +13,10 @@ public class ReceiptJOptionPaneOutput implements ReceiptOutputStrategy {
     public void outputReceipt(String data) {
         JOptionPane.showMessageDialog(null, data);
     }
-    
+ 
+    @Override
+    public void outputMessage(String msg) {
+        JOptionPane.showMessageDialog(null, msg);
+    }
+   
 }

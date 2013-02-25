@@ -6,4 +6,6 @@ package instructor.sample;
  */
 public interface ReceiptOutputStrategy {
     public abstract void outputReceipt(String data);
+    
+    public abstract void outputMessage(String msg);
 }
