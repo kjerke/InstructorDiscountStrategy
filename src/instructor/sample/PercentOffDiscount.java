@@ -1,8 +1,13 @@
 package instructor.sample;
 
 /**
- *
- * @author Instlogin
+ * This class represents a discount strategy implementation where a flat
+ * rate is applied to the cost of a product.
+ * 
+ * NOTE: JavaDoc documentation is incomplete. Need to fix!!!
+ * 
+ * @author  Jim Lombardo
+ * @version 1.00
  */
 public class PercentOffDiscount implements DiscountStrategy {
     private double discountRate = 0.10;

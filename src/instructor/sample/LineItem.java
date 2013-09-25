@@ -1,11 +1,17 @@
 package instructor.sample;
 
 /**
- *
- * @author Instlogin
+ * This class represents a simulation of a Line Item in a retail sales 
+ * invoice or receipt. It consolidates data from product and user input, and
+ * provides calculated subtotals.
+ * 
+ * NOTE: JavaDoc documentation is incomplete. Need to fix!!!
+ * 
+ * @author  Jim Lombardo
+ * @version 1.00
  */
 public class LineItem {
-    ReceiptDataAccessStrategy db; // strategy component (DIP compliant)
+    private ReceiptDataAccessStrategy db; // strategy component (DIP compliant)
     private Product product;
     private int qty;
 

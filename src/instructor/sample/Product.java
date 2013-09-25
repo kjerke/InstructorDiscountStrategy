@@ -1,8 +1,13 @@
 package instructor.sample;
 
 /**
- *
- * @author Instlogin
+ * This class represents a simulation of a product in a retail sales
+ * organization.
+ * 
+ * NOTE: JavaDoc documentation is incomplete. Need to fix!!!
+ * 
+ * @author  Jim Lombardo
+ * @version 1.00
  */
 public class Product {
     private String prodId;

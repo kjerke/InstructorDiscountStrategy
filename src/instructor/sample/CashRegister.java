@@ -19,25 +19,45 @@ public class CashRegister {
     // access to this property.
     private Receipt receipt;
     
+    /**
+     * Ends the sale session and causes receipt to be output to 
+     * designated output device. (See Startup class)
+     */
     public final void endSaleAndOutputReceipt() {
         receipt.outputReceipt();
     }
     
+    /**
+     * Delegates job of adding a line item to the receipt. If parameters do not
+     * validate, sends error message to designated output.
+     * 
+     * @param prodId - product id
+     * @param qty - quantity of product ordered
+     */
     public final void addItemToSale(String prodId, int qty) {
             // Validation needed
             if(prodId ==  null || prodId.length() == 0 || qty < 1) {
                 receipt.outputMessage(ITEM_ERR_MSG);
-                return; // premature exit after log to console
+                return; // premature exit
             }
             receipt.addLineItem(prodId, qty);
     }
     
+    /**
+     * Creates a blank receipt object and delegates job of finding a
+     * customer matching an id to the Receipt object. If parameters do not
+     * validate, sends error message to designated output.
+     * 
+     * @param custId - customer id
+     * @param db - data source strategy
+     * @param output - output strategy
+     */
     public final void startNewSale(String custId, ReceiptDataAccessStrategy db, ReceiptOutputStrategy output) {
         // Validation needed.
         if(custId == null || custId.length() == 0
                 || db == null || output == null) {
             receipt.outputMessage(PROD_ERR_MSG);
-            return; // end prematurely after log to console
+            return; // end prematurely 
         }
         
         receipt = new Receipt(custId, db, output);

@@ -1,8 +1,14 @@
 package instructor.sample;
 
 /**
- *
- * @author Instlogin
+ * This class represents a discount strategy implementation where a flat
+ * rate is applied to the cost of a product if and only if a minimum 
+ * quantity is purchased. That minimum is configurable.
+ * 
+ * NOTE: JavaDoc documentation is incomplete. Need to fix!!!
+ * 
+ * @author  Jim Lombardo
+ * @version 1.00
  */
 public class QtyDiscount implements DiscountStrategy {
     private double discountRate = 0.10;

@@ -1,8 +1,13 @@
 package instructor.sample;
 
 /**
- *
- * @author Instlogin
+ * This class simulates a situation where there is no discount for a given
+ * product.
+ * 
+ * NOTE: JavaDoc documentation is incomplete. Need to fix!!!
+ * 
+ * @author  Jim Lombardo
+ * @version 1.00
  */
 public class NoDiscount implements DiscountStrategy {
     private double discountRate = 0;
