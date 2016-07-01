@@ -17,7 +17,7 @@ public class CashRegister {
     
     // No accessors/mutators provided because only CashRegister should have 
     // access to this property.
-    private Receipt receipt;
+    private Receipt2 receipt;
     
     /**
      * Ends the sale session and causes receipt to be output to 
@@ -60,7 +60,7 @@ public class CashRegister {
             return; // end prematurely 
         }
         
-        receipt = new Receipt(custId, db, output);
+        receipt = new Receipt2(custId, db, output);
     }
     
    

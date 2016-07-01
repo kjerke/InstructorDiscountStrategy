@@ -18,6 +18,8 @@ public class FakeDatabase implements ReceiptDataAccessStrategy {
         new Customer("300", "Bob Clementi")
     };
     
+
+    
     private Product[] products = {
         new Product("A101", "MLB Brewer's Hat ", 19.95, new PercentOffDiscount(0.15)),
         new Product("B205", "Men's Dress Shirt", 35.50, new QtyDiscount(.10,5)),

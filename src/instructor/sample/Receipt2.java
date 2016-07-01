@@ -1,5 +1,7 @@
 package instructor.sample;
 
+import edu.wctc.jgl.prettyformat.JustifyDirection;
+import edu.wctc.jgl.prettyformat.TableFormatter;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +15,7 @@ import java.util.Date;
  * @author  Jim Lombardo
  * @version 1.00
  */
-public class Receipt {
+public class Receipt2 {
     private final String CUST_INPUT_ERR = 
             "Customer id is a required field. Please try again.";
     private final String CUST_NOT_FOUND_ERR =
@@ -41,7 +43,7 @@ public class Receipt {
      * @param db - data source strategy
      * @param output - output strategy
      */
-    public Receipt(String custId, ReceiptDataAccessStrategy db, ReceiptOutputStrategy output) {
+    public Receipt2(String custId, ReceiptDataAccessStrategy db, ReceiptOutputStrategy output) {
         this.setDb(db);
         this.output = output;
         this.customer = findCustomer(custId);
@@ -145,29 +147,52 @@ public class Receipt {
         StringBuilder receiptData = new StringBuilder("Thank you for shopping at Kohls!\n\n");
         receiptData.append("Sold to: ").append(customer.getName()).append(CRLF);
         receiptData.append("Date of Sale: ").append(getReceiptDateFormatted()).append(CRLF);
-        receiptData.append("Receipt No.: " ).append(Receipt.receiptNo).append(CRLF2);
+        receiptData.append("Receipt No.: " ).append(Receipt2.receiptNo).append(CRLF2);
+        output.outputReceipt(receiptData.toString());
         
         // Now process line items
-        receiptData.append("ID\tItem\t\t\tPrice\tQty\tSubtotal\tDiscount").append(CRLF);
-        receiptData.append("------------------------------------------------------------------------").append(CRLF);
-        for(LineItem item : lineItems) {
-            receiptData.append(item.getProduct().getProdId()).append("\t");
-            receiptData.append(item.getProduct().getDescription()).append("\t");
-            receiptData.append(nf.format(item.getProduct().getUnitPrice())).append("\t");
-            receiptData.append(item.getQty()).append("\t");
-            receiptData.append(nf.format(item.getOrigPriceSubtotal())).append("\t\t");
-            receiptData.append(nf.format(item.getDiscountAmt())).append(CRLF);
+        String[][] lineItemData = new String[lineItems.length+2][6];
+        lineItemData[0][0] = "ID";
+        lineItemData[0][1] = "Item";
+        lineItemData[0][2] = "Price";
+        lineItemData[0][3] = "Qty";
+        lineItemData[0][4] = "Subtotal";
+        lineItemData[0][5] = "Discount";
+        
+        lineItemData[1][0] = "--";
+        lineItemData[1][1] = "----";
+        lineItemData[1][2] = "-----";
+        lineItemData[1][3] = "---";
+        lineItemData[1][4] = "--------";
+        lineItemData[1][5] = "--------";
+         
+        for(int row=2; row < (lineItems.length+2); row++) {
+            int col = 0;
+            lineItemData[row][col] = lineItems[row-2].getProduct().getProdId();
+            lineItemData[row][++col] = lineItems[row-2].getProduct().getDescription();
+            lineItemData[row][++col] = nf.format(lineItems[row-2].getProduct().getUnitPrice());
+            lineItemData[row][++col] = ""+lineItems[row-2].getQty();
+            lineItemData[row][++col] = nf.format(lineItems[row-2].getOrigPriceSubtotal());
+            lineItemData[row][++col] = nf.format(lineItems[row-2].getDiscountAmt());
         }
         
+        TableFormatter formatter = new TableFormatter();
+        JustifyDirection[] justifyDir = {
+            JustifyDirection.LEFT,JustifyDirection.LEFT,
+            JustifyDirection.RIGHT,JustifyDirection.RIGHT,
+            JustifyDirection.RIGHT,JustifyDirection.RIGHT
+        };
+        formatter.outputData(lineItemData, justifyDir, receiptNo);
+       
         // Now process totals
-        receiptData.append(CRLF);
-        receiptData.append("\t\t\t\t\t\t\t\t--------").append(CRLF);
+        receiptData = new StringBuilder(CRLF);
+        receiptData.append("\t\t\t\t\t\t--------").append(CRLF);
         double totalNet = getTotalBeforeDiscount();
-        receiptData.append("\t\t\t\t\t\tNet Total: \t").append(nf.format(totalNet)).append(CRLF);
+        receiptData.append("\t\t\t\tNet Total: \t").append(nf.format(totalNet)).append(CRLF);
         double totalDiscount = getTotalDiscount();
-        receiptData.append("\t\t\t\t\t\tTotal Saved: \t-").append(nf.format(totalDiscount)).append(CRLF);
+        receiptData.append("\t\t\t\tTotal Saved: \t-").append(nf.format(totalDiscount)).append(CRLF);
         double totalDue = totalNet - totalDiscount;
-        receiptData.append("\t\t\t\t\t\tTotal Due: \t").append(nf.format(totalDue)).append(CRLF);
+        receiptData.append("\t\t\t\tTotal Due: \t").append(nf.format(totalDue)).append(CRLF);
         
         // Now generate data string...
         // Notice that the format is hardcoded into this method. We could do
