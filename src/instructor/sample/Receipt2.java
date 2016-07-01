@@ -7,10 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class represents a simulation of a real receipt in a retail sales
- * situation. It is responsible for managing miscellaneous receipt, customer
- * and line item information. It also serves as a high-level service class,
- * delegating to varying data access strategies and output strategies.
+ * This class has the same responsibility as Receipt.java, but uses the 
+ * PrettyFormat library to format output.
  * 
  * @author  Jim Lombardo
  * @version 1.00
