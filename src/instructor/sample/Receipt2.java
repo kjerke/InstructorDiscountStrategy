@@ -180,10 +180,10 @@ public class Receipt2 {
             JustifyDirection.RIGHT,JustifyDirection.RIGHT,
             JustifyDirection.RIGHT,JustifyDirection.RIGHT
         };
-        formatter.outputData(lineItemData, justifyDir, receiptNo);
+        output.outputReceipt(formatter.toFormattedStr(lineItemData, justifyDir, receiptNo));
        
         // Now process totals
-        receiptData = new StringBuilder(CRLF);
+        receiptData = new StringBuilder();
         receiptData.append("\t\t\t\t\t\t--------").append(CRLF);
         double totalNet = getTotalBeforeDiscount();
         receiptData.append("\t\t\t\tNet Total: \t").append(nf.format(totalNet)).append(CRLF);
