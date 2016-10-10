@@ -49,4 +49,10 @@ public class QtyDiscount implements DiscountStrategy {
         this.discountRate = discountRate;
     }
     
+    public static void main(String[] args) {
+        DiscountStrategy discount = new QtyDiscount(.10,2);
+        double discountAmt = discount.getDiscountAmt(100, 2);
+        System.out.println(discountAmt);
+    }
+    
 }

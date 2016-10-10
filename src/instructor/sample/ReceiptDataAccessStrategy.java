@@ -11,7 +11,7 @@ package instructor.sample;
  */
 public interface ReceiptDataAccessStrategy {
 
-    public abstract ICustomer findCustomer(final String custId);
+    public abstract Customer findCustomer(final String custId);
 
     public abstract Product findProduct(final String prodId);
 

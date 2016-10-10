@@ -24,18 +24,19 @@ public class Startup {
      * @param args - not used
      */
     public static void main(String[] args) {
-        CashRegister cr = new CashRegister();
+        PosTerminal pos = new PosTerminal();
+        ReceiptDataAccessStrategy db = new InMemoryDataAccess();
         
         // Customer #1 sale
-        cr.startNewSale("100", new FakeDatabase(), new ReceiptConsoleOutput());
-        cr.addItemToSale("B205", 2);
-        cr.addItemToSale("A101", 1);
-        cr.endSaleAndOutputReceipt();
+        pos.startNewSale("", db, new ReceiptConsoleOutput());
+        pos.addItemToSale("B205", 2);
+        pos.addItemToSale("A101", 1);
+        pos.endSaleAndOutputReceipt();
         
         // Customer #2 sale
-        cr.startNewSale("200", new FakeDatabase(), new ReceiptConsoleOutput());
-        cr.addItemToSale("C222", 4);
-        cr.addItemToSale("B205", 6);
-        cr.endSaleAndOutputReceipt();
+        pos.startNewSale("200", new InMemoryDataAccess(), new ReceiptConsoleOutput());
+        pos.addItemToSale("C222", 4);
+        pos.addItemToSale("B205", 6);
+        pos.endSaleAndOutputReceipt();
     }
 }

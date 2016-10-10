@@ -25,7 +25,7 @@ public class Receipt {
     private ReceiptDataAccessStrategy db; // strategy component (DIP compliant)
     private static int receiptNo = 0; // global counter
     private Date receiptDate;
-    private ICustomer customer; // strategy component
+    private Customer customer; // strategy component
     private LineItem[] lineItems;
     // strategy component (DIP compliant)
     private ReceiptOutputStrategy output;
@@ -50,12 +50,12 @@ public class Receipt {
         receiptDate = new Date();
     }
     
-    private final ICustomer findCustomer(final String custId) {
+    private final Customer findCustomer(final String custId) {
         if(custId == null || custId.length() == 0) {
             output.outputMessage(CUST_INPUT_ERR);
         }
         
-        ICustomer cust = db.findCustomer(custId);
+        Customer cust = db.findCustomer(custId);
         if(cust == null) {
             output.outputMessage(CUST_INPUT_ERR);
         }

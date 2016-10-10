@@ -11,7 +11,7 @@ package instructor.sample;
 public class OracleDataAccess implements ReceiptDataAccessStrategy {
 
     @Override
-    public ICustomer findCustomer(String custId) {
+    public Customer findCustomer(String custId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -60,4 +60,12 @@ public class Product {
     }
     
     
+    public static void main(String[] args) {
+        Product product = new Product("888", "Baseball Hat", 
+                29.95, new PercentOffDiscount(.10));
+        
+        double discountAmt = product.getDiscountStrategy().getDiscountAmt(29.95, 2);
+        System.out.println(discountAmt);
+    }
+    
 }

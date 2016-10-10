@@ -8,12 +8,13 @@ package instructor.sample;
  * @author  Jim Lombardo
  * @version 1.00
  */
-public class CashRegister {
+public class PosTerminal {
     private static final String ITEM_ERR_MSG = 
             "Item not added to sale because\nprodId not available or qty < 1";
     private static final String PROD_ERR_MSG =
             "Sorry, new sale cancelled because\nan illegal argument"
             + "has been passed\nto CashRegister.startNewSale()";
+    private ReceiptOutputStrategy output;
     
     // No accessors/mutators provided because only CashRegister should have 
     // access to this property.
@@ -56,6 +57,8 @@ public class CashRegister {
         // Validation needed.
         if(custId == null || custId.length() == 0
                 || db == null || output == null) {
+            
+            
             receipt.outputMessage(PROD_ERR_MSG);
             return; // end prematurely 
         }

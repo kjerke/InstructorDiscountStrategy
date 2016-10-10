@@ -10,6 +10,7 @@ package instructor.sample;
  * @version 1.00
  */
 public class PercentOffDiscount implements DiscountStrategy {
+    public static final String PASS_MSG = "test passed";
     private double discountRate = 0.10;
     
     public PercentOffDiscount(double rate) {
@@ -31,6 +32,16 @@ public class PercentOffDiscount implements DiscountStrategy {
     public final void setDiscountRate(double discountRate) {
         // validation needed here
         this.discountRate = discountRate;
+    }
+    
+    public static void main(String[] args) {
+        DiscountStrategy d = new NoDiscount();
+        double discountAmt = d.getDiscountAmt(100, 2);
+        if(discountAmt == 0) {
+            System.out.println(PASS_MSG);
+        } else {
+            System.out.println("test failed, got " + discountAmt);
+        }
     }
     
 }
