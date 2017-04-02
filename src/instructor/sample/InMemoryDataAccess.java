@@ -37,7 +37,7 @@ public class InMemoryDataAccess implements ReceiptDataAccessStrategy {
      * @param custId - must not be null or empty
      * @return found Customer or null if not found or bad argument
      */
-    @Override
+    
     public final Customer findCustomer(final String custId) {
         // validation is needed for method parameter
         if(custId == null || custId.length() == 0) {
